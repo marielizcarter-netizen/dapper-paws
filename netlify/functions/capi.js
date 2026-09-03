@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   console.log('Token present:', !!process.env.REDDIT_CAPI_TOKEN, 'Length:', process.env.REDDIT_CAPI_TOKEN?.length);
 
   const response = await fetch(
-    `https://ads-api.reddit.com/api/v3/pixels/${process.env.REDDIT_AD_ACCOUNT_ID}/conversion_events?test_id=t2_2m1qdv5mrr`,
+    'https://ads-api.reddit.com/api/v3/pixels/${process.env.REDDIT_AD_ACCOUNT_ID}/conversion_events?test_id=t2_2m1qdv5mrr',
     {
       method: 'POST',
       headers: {

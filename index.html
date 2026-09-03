@@ -493,7 +493,7 @@
 function sendCAPI(eventType, extras = {}) {
   const conversionId = crypto.randomUUID();
 
-  rdt('track', eventType, { ...extras, conversionId });
+  rdt('track', eventType, { ...extras, conversion_id:conversionId });
 
   fetch('/.netlify/functions/capi', {
     method: 'POST',

@@ -1,34 +1,37 @@
-async function getAccessToken() {
-  const credentials = Buffer.from(
-    `${process.env.REDDIT_CLIENT_ID}:${process.env.REDDIT_CLIENT_SECRET}`
-  ).toString('base64');
-
-  const response = await fetch('https://www.reddit.com/api/v1/access_token', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${credentials}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: 'grant_type=client_credentials'
-  });
-
-  const data = await response.json();
-  return data.access_token;
-}
-
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method not allowed' };
   }
 
   const data = JSON.parse(event.body);
-  console.log('Received event:', data);
 
-  const token = await getAccessToken();
-  console.log('Got token:', token);
+  const response = await fetch(
+    `https://ads-api.reddit.com/api/v3/pixels/${process.env.REDDIT_AD_ACCOUNT_ID}/conversion_events`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.REDDIT_CAPI_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: {
+          events: [{
+            event_at: Date.now(),
+            action_source: 'SERVER',
+            type: {
+              tracking_type: data.eventType
+            }
+          }]
+        }
+      })
+    }
+  );
+
+  const result = await response.json();
+  console.log('Reddit CAPI response:', result);
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ received: true })
+    body: JSON.stringify({ received: true, reddit: result })
   };
 };

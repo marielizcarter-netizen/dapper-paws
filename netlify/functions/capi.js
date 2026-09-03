@@ -10,7 +10,6 @@ exports.handler = async (event) => {
     {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.REDDIT_CAPI_TOKEN}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -20,6 +19,16 @@ exports.handler = async (event) => {
             action_source: 'SERVER',
             type: {
               tracking_type: data.eventType
+            },
+            user: {
+              ip_address: event.headers['x-forwarded-for'],
+              user_agent: event.headers['user-agent']
+            },
+            metadata: {
+              conversion_id: data.conversionId,
+              currency: data.currency,
+              value: data.value,
+              item_count: data.itemCount
             }
           }]
         }

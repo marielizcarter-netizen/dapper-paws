@@ -489,54 +489,36 @@
 <div id="toast"></div>
 
 <script>
-// ─── REDDIT PIXEL EVENTS ─────────────────────────────────────────────────
-// These functions fire Reddit Pixel events. They'll silently no-op until
-// you paste your Pixel base code into the <head> above.
+// ─── CAPI HELPER ──────────────────────────────────────────────────────────
+function sendCAPI(eventType, extras = {}) {
+  const conversionId = crypto.randomUUID();
 
+  rdt('track', eventType, { ...extras, conversionId });
+
+  fetch('/.netlify/functions/capi', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      eventType,
+      conversionId,
+      ...extras
+    })
+  }).then(r => r.json()).then(d => console.log('[CAPI] response:', d));
+
+  console.log('[Pixel+CAPI] fired:', eventType, 'id:', conversionId);
+}
+
+// ─── REDDIT PIXEL EVENTS ─────────────────────────────────────────────────
 function trackViewContent() {
-  try {
-    rdt('track', 'ViewContent'); 
-    console.log('[Pixel] ViewContent fired');
-  } catch(e) { console.log('[Pixel] ViewContent — pixel not loaded yet'); }
+  sendCAPI('ViewContent');
 }
 
 function trackAddToCart(productName, price) {
-  try {
-    rdt('track', 'AddToCart', {
-      currency: 'USD',
-      value: price,
-      itemCount: 1
-    });
-    console.log('[Pixel] AddToCart fired —', productName);
-  } catch(e) { console.log('[Pixel] AddToCart — pixel not loaded yet'); }
+  sendCAPI('AddToCart', { currency: 'USD', value: price, itemCount: 1 });
 }
 
 function trackPurchase(productName, price) {
-  try {
-    rdt('track', 'Purchase', {
-      currency: 'USD',
-      value: price,
-      itemCount: 1
-    });
-    console.log('[Pixel] Purchase fired —', productName);
-  } catch(e) { console.log('[Pixel] Purchase — pixel not loaded yet'); }
-}
-
-// ─── SIGNUP BEHAVIOR ──────────────────────────────────────────────────────
-function scrollToSignup() {
-  document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
-  trackViewContent();
-}
-
-function handleSignup(e) {
-  e.preventDefault();
-  const email = document.getElementById('signup-email').value;
-  try {
-    rdt('track', 'Lead', { currency: 'USD', value: 0 });
-    console.log('[Pixel] Lead fired —', email);
-  } catch(err) { console.log('[Pixel] Lead — pixel not loaded yet'); }
-  showToast('🐾 You\'re on the list! We\'ll be in touch.');
-  document.getElementById('signup-email').value = '';
+  sendCAPI('Purchase', { currency: 'USD', value: price, itemCount: 1 });
 }
 
 function showToast(msg) {
@@ -546,12 +528,8 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
-// Track PageView on load (fires automatically once Pixel is installed)
 window.addEventListener('load', () => {
-  try {
-    rdt('track', 'PageView');
-    console.log('[Pixel] PageView fired');
-  } catch(e) { console.log('[Pixel] PageView — paste your Pixel code in <head> to activate'); }
+  sendCAPI('PageVisit');
 });
 </script>
 

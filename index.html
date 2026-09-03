@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dapper Paws — Handmade Dog Ties</title>
+
+<!-- ================================================
+  REDDIT PIXEL — paste your Pixel snippet here
+  ================================================ -->
+<!-- REDDIT PIXEL START -->
+<!-- Replace this comment block with your Reddit Pixel base code -->
+<!-- REDDIT PIXEL END -->
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #faf7f2;
+    --warm-white: #fff9f4;
+    --bark: #6b4f3a;
+    --bark-light: #9b7355;
+    --moss: #5c7a5a;
+    --moss-light: #7a9e78;
+    --blush: #e8d5c4;
+    --text: #2c1f14;
+    --text-mid: #6b4f3a;
+    --text-light: #9b8070;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--text);
+  }
+
+  /* NAV */
+  nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--blush);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--bark);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span {
+    color: var(--moss);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    color: var(--text-mid);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--bark); }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    align-items: center;
+  }
+
+  .hero-image {
+    background: var(--blush);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-content {
+    background: var(--warm-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+  }
+
+  .hero-eyebrow {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    line-height: 1.15;
+    color: var(--bark);
+    margin-bottom: 20px;
+  }
+
+  .hero-title em {
+    color: var(--moss);
+    font-style: normal;
+  }
+
+  .hero-desc {
+    font-family: -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 36px;
+    max-width: 380px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--bark);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .btn-primary:hover { background: var(--bark-light); }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--moss);
+    color: #fff;
+    text-align: center;
+    padding: 12px 40px;
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+  }
+
+  .trust-bar span::before {
+    content: '✦ ';
+    opacity: 0.7;
+  }
+
+  /* STORY */
+  .story {
+    max-width: 760px;
+    margin: 80px auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+
+  .section-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 16px;
+  }
+
+  .story h2 {
+    font-size: 34px;
+    color: var(--bark);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .story p {
+    font-family: -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+  }
+
+  /* SHOP */
+  .shop {
+    background: var(--warm-white);
+    padding: 80px 40px;
+  }
+
+  .shop-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .shop-header h2 {
+    font-size: 34px;
+    color: var(--bark);
+    margin-top: 12px;
+  }
+
+  .products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: var(--cream);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(107,79,58,0.12);
+  }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--blush);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+  }
+
+  .product-img .placeholder-icon {
+    font-size: 48px;
+    opacity: 0.4;
+  }
+
+  .product-info {
+    padding: 20px;
+  }
+
+  .product-name {
+    font-size: 18px;
+    color: var(--bark);
+    margin-bottom: 6px;
+  }
+
+  .product-desc {
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-price {
+    font-family: -apple-system, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bark);
+  }
+
+  .btn-add {
+    background: var(--moss);
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 4px;
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-add:hover { background: var(--moss-light); }
+
+  /* SIGNUP */
+  .signup-section {
+    background: var(--blush);
+    padding: 64px 40px;
+    text-align: center;
+  }
+  .signup-section h2 { font-size: 28px; color: var(--bark); margin-bottom: 10px; }
+  .signup-section p { font-family: -apple-system, sans-serif; font-size: 15px; color: var(--text-light); margin-bottom: 28px; }
+  .signup-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .signup-form input {
+    padding: 12px 20px;
+    border: 1px solid var(--bark-light);
+    border-radius: 4px;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    width: 280px;
+    background: var(--warm-white);
+    color: var(--text);
+    outline: none;
+  }
+  .signup-form input:focus { border-color: var(--bark); }
+  .signup-form button {
+    padding: 12px 28px;
+    background: var(--bark);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .signup-form button:hover { background: var(--bark-light); }
+
+  /* CART TOAST */
+  #toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--bark);
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark);
+    color: var(--blush);
+    text-align: center;
+    padding: 40px;
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  footer .footer-logo {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  footer a { color: var(--blush); }
+</style>
+</head>
+<body>
+
+<!-- COMING SOON BANNER -->
+<div style="background:#c8a882;color:#fff;text-align:center;padding:10px 24px;font-family:-apple-system,sans-serif;font-size:13px;font-weight:600;letter-spacing:0.04em;">
+  🐾 We're not open yet — check back soon!
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Dapper <span>Paws</span></div>
+  <ul class="nav-links">
+    <li><a href="#shop" onclick="trackViewContent()">Shop</a></li>
+    <li><a href="#story">Our Story</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-image">
+    <img src="dapper_paws_hero.jpg" alt="A dog wearing a handmade Dapper Paws tie">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Handmade with love</div>
+    <h1 class="hero-title">Your pup deserves to look <em>fabulous.</em></h1>
+    <p class="hero-desc">One-of-a-kind handmade ties for dogs of all sizes — and all genders. Because every good boy and girl deserves a little something dapper.</p>
+    <a href="#shop" class="btn-primary" onclick="trackViewContent()">See the Collection</a>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span>Handmade to order</span>
+  <span>Ships in 3–5 days</span>
+  <span>Foster-family owned</span>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="section-label">The Story</div>
+  <h2>Made stitch by stitch, with every dog in mind.</h2>
+  <p>Dapper Paws started with a foster dog, a sewing machine, and the conviction that a well-dressed pup is a happy pup. Every tie is cut, sewn, and finished by hand — in fabrics chosen because they're as joyful as the dogs who wear them. We're a one-person shop, and we love it that way.</p>
+</section>
+
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="shop-header">
+    <div class="section-label">The Collection</div>
+    <h2>Ties for Every Good Boy & Girl</h2>
+  </div>
+
+  <div class="products">
+
+    <div class="product-card">
+      <div class="product-img">
+        <img src="dapper_paws_hero.jpg" alt="The Greenery Tie">
+      </div>
+      <div class="product-info">
+        <div class="product-name">The Greenery</div>
+        <div class="product-desc">Bear print on sage green stripe. Adjustable collar attachment. Hand-sewn, one of a kind.</div>
+        <div class="product-footer">
+          <div class="product-price">$18</div>
+          <span style="font-family:-apple-system,sans-serif;font-size:12px;color:var(--text-light);font-style:italic;">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="placeholder-icon">🌸</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">The Bloom</div>
+        <div class="product-desc">Floral cotton in blush and cream. Perfect for spring portraits or adoption day photos.</div>
+        <div class="product-footer">
+          <div class="product-price">$18</div>
+          <span style="font-family:-apple-system,sans-serif;font-size:12px;color:var(--text-light);font-style:italic;">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="placeholder-icon">🍂</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">The Harvest</div>
+        <div class="product-desc">Warm plaid in rust, gold, and brown. Very distinguished. Very autumn. Very good pup.</div>
+        <div class="product-footer">
+          <div class="product-price">$18</div>
+          <span style="font-family:-apple-system,sans-serif;font-size:12px;color:var(--text-light);font-style:italic;">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Dapper Paws</div>
+  <p>Handmade dog ties, made with love in Los Angeles.</p>
+  <p style="margin-top:16px;opacity:0.5;font-size:11px;">© 2026 Dapper Paws. All rights reserved.</p>
+</footer>
+
+<!-- CART TOAST -->
+<div id="toast"></div>
+
+<script>
+// ─── REDDIT PIXEL EVENTS ─────────────────────────────────────────────────
+// These functions fire Reddit Pixel events. They'll silently no-op until
+// you paste your Pixel base code into the <head> above.
+
+function trackViewContent() {
+  try {
+    rdt('track', 'ViewContent', {
+      currency: 'USD',
+      value: 18.00
+    });
+    console.log('[Pixel] ViewContent fired');
+  } catch(e) { console.log('[Pixel] ViewContent — pixel not loaded yet'); }
+}
+
+function trackAddToCart(productName, price) {
+  try {
+    rdt('track', 'AddToCart', {
+      currency: 'USD',
+      value: price,
+      itemCount: 1
+    });
+    console.log('[Pixel] AddToCart fired —', productName);
+  } catch(e) { console.log('[Pixel] AddToCart — pixel not loaded yet'); }
+}
+
+function trackPurchase(productName, price) {
+  try {
+    rdt('track', 'Purchase', {
+      currency: 'USD',
+      value: price,
+      itemCount: 1
+    });
+    console.log('[Pixel] Purchase fired —', productName);
+  } catch(e) { console.log('[Pixel] Purchase — pixel not loaded yet'); }
+}
+
+// ─── SIGNUP BEHAVIOR ──────────────────────────────────────────────────────
+function scrollToSignup() {
+  document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
+  trackViewContent();
+}
+
+function handleSignup(e) {
+  e.preventDefault();
+  const email = document.getElementById('signup-email').value;
+  try {
+    rdt('track', 'Lead', { currency: 'USD', value: 0 });
+    console.log('[Pixel] Lead fired —', email);
+  } catch(err) { console.log('[Pixel] Lead — pixel not loaded yet'); }
+  showToast('🐾 You\'re on the list! We\'ll be in touch.');
+  document.getElementById('signup-email').value = '';
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// Track PageView on load (fires automatically once Pixel is installed)
+window.addEventListener('load', () => {
+  try {
+    rdt('track', 'PageView');
+    console.log('[Pixel] PageView fired');
+  } catch(e) { console.log('[Pixel] PageView — paste your Pixel code in <head> to activate'); }
+});
+</script>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ exports.handler = async (event) => {
         data: {
           events: [{
             event_at: Date.now(),
-            action_source: 'SERVER',
+            action_source: 'Website',
             type: {
               tracking_type: data.eventType
             },

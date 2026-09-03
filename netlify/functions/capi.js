@@ -10,11 +10,11 @@ exports.handler = async (event) => {
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         data: {
           events: [{
+            test_id: 't2_2m1qdv5mrr',
             event_at: Date.now(),
             action_source: 'SERVER',
             type: {

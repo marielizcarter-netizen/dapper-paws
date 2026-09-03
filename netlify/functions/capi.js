@@ -4,7 +4,7 @@ exports.handler = async (event) => {
   }
 
   const data = JSON.parse(event.body);
-
+console.log('Token present:', !!process.env.REDDIT_CAPI_TOKEN, 'Length:', process.env.REDDIT_CAPI_TOKEN?.length);
   const response = await fetch(
     `https://ads-api.reddit.com/api/v3/pixels/${process.env.REDDIT_AD_ACCOUNT_ID}/conversion_events`,
     {
